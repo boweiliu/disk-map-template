@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img" aria-label="Disk Map">
+  <rect width="240" height="160" rx="12" fill="#1f2933"/>
+  <g stroke="#1f2933" stroke-width="2">
+    <rect x="14" y="14" width="118" height="84" fill="#3b82a0"/>
+    <rect x="134" y="14" width="92" height="52" fill="#e0903f"/>
+    <rect x="134" y="68" width="44" height="30" fill="#7a9e5f"/>
+    <rect x="180" y="68" width="46" height="30" fill="#b5586f"/>
+    <rect x="14" y="100" width="70" height="46" fill="#8c6bb1"/>
+    <rect x="86" y="100" width="60" height="46" fill="#4aa59a"/>
+    <rect x="148" y="100" width="40" height="46" fill="#c9b24a"/>
+    <rect x="190" y="100" width="36" height="22" fill="#d9682b"/>
+    <rect x="190" y="124" width="36" height="22" fill="#6b7bd6"/>
+  </g>
+  <g stroke="#3b82a0" stroke-width="2">
+    <rect x="21" y="21" width="62" height="44" fill="#5a9fbb"/>
+    <rect x="85" y="21" width="40" height="24" fill="#4f93b0"/>
+    <rect x="85" y="47" width="40" height="18" fill="#6fb0c9"/>
+    <rect x="21" y="67" width="104" height="24" fill="#4a8cab"/>
+  </g>
+  <g stroke="#e0903f" stroke-width="2">
+    <rect x="141" y="21" width="48" height="38" fill="#eba55c"/>
+    <rect x="191" y="21" width="28" height="38" fill="#d98a32"/>
+  </g>
+</svg>

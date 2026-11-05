@@ -1,54 +1,46 @@
-# Your workspace
+<p align="center">
+  <img alt="Disk Map" src="template.svg" width="480">
+</p>
 
-This folder is your agent's home: everything it knows, everything it builds,
-and the machinery that keeps it running.
+# Disk Map
 
-## Creations
+<p align="center">
+  <a href="https://studio.imbue.com/open?git_url=https://github.com/boweiliu/disk-map-template"><img alt="Open in Imbue Studio" height="64" src="https://img.shields.io/badge/Open%20in%20Imbue%20Studio-D8D1C0?style=for-the-badge"></a>
+</p>
 
-Broadly, in Imbue Studio you make "creations". These can be "code" (apps, skills, and
-the services behind them) or "data" (documents, images, notes).
+Didn't work? Create a Studio workspace and paste this to your agent:
+` /use-template https://github.com/boweiliu/disk-map-template`
 
-Imbue Studio makes this easier by defining some conventions for the common things
-you'll want to make:
+## Why you care
 
-1. an "app" - something you can open as a tab and interact with
-2. a "skill" - teaches your agent how to do work you care about. A skill that
-   is automatically run on a schedule is called an "automation": a routine
-   (see `routines/` and the Routines app; the weekly Caretaker is the
-   built-in example)
-3. some "data" - documents, images, notes, or data created by your apps and
-   skills
-4. some "customizations" - changes to any of the above. Everything in Imbue Studio
-   can be modified by you!
+When a workspace disk fills up, "df" says how much is used but not by what, and guessing wastes hours. Disk Map scans the disk once and shows every folder as a block sized by its real footprint, so the thing eating your space is the biggest block on the screen.
 
-## What's here
+## How to use it
 
-- `apps/` - Everything you can open as a tab: the built-in apps (chat, the
-  terminal, Files, the browser, System Monitor) and the apps your agent builds for you. (A shortcut
-  to `system/apps/`.)
-- `skills/` - Everything your agent knows how to do: the built-in skills and
-  the ones it has learned for you. (A shortcut to `.agents/skills/`.)
-- `routines/` - Everything that runs on a schedule, one file each; the
-  Routines app shows them. (A shortcut to `system/routines/`.)
-- `data/` - Your workspace's data: documents and project folders, files
-  you've uploaded, your agent's memories, and each app's stored data.
-- `docs/` - Guides to this workspace: what it is, how it works, and a history
-  of where it came from.
-- `system/` - The machinery that runs the workspace: the apps themselves,
-  background services, scripts, and configuration. You can look around (every
-  folder has a README), and your agent maintains it for you.
+Open **Disk Map** from the workspace (it runs on port 8194 and is started by supervisord).
 
-A few housekeeping files live alongside them:
+- On first load, with no scan saved, it starts one by itself (about a minute and a half); afterwards it shows the newest saved scan.
+- Click a block to see what it is and how big; **Copy path** puts its path on your clipboard. Clicking an entry in the list of biggest items beside the map zooms the map to it.
+- **Scan again** takes a fresh scan in the background. Only one scan runs at a time, and the newest 20 are kept.
+- `GET /api/scan` returns the newest scan as JSON and `GET /api/scan/raw` the same, pretty-printed; `GET /health` answers `{"status": "ok"}`.
 
-- `README.md` - This file.
-- `CLAUDE.md` - The standing instructions your agent follows.
-- `pyproject.toml` and `uv.lock` - The Python project definition; the tooling
-  requires them at the top level.
+To run it by hand from the workspace root: `uv sync --locked --project system/apps/disk_map`, then `system/apps/disk_map/.venv/bin/disk-map`.
 
-## Where things are kept safe
+## Ideas for making it yours
 
-The workspace is a git repository: code and configuration changes are
-committed as your agent works. Everything under `data/` is deliberately kept
-out of git (it can be large, personal, or both) and is protected by the
-workspace's continuous encrypted backup instead, along with the rest of the
-workspace. See `docs/` for details.
+- Take a scan every night with a routine that calls `POST /api/rescan`, so there is always a recent one.
+- Add a "what grew since the last scan" view; older scans are already kept for it.
+- Lower the size thresholds in `scanner.py` (`COLLAPSE_BELOW_BYTES`, `FILE_LEAF_MIN_BYTES`) to show finer detail, or raise them for a lighter page.
+- Limit the scan to one folder or leave out mounts you do not care about.
+- Mark folders you decided to keep, so a later cleanup does not rediscover them.
+
+## What this is
+
+This repository is a published **Imbue Studio template**: a clean, bootable
+snapshot of what an agent built, ready to adapt into your own. It is NOT the
+generic workspace template -- it is this specific project.
+
+[`template.md`](template.md) is the full manifest -- what it is, how it
+works, what it needs to run, and what to adapt -- with the
+machine-readable half (recipe, requirements, and the environment it needs
+installed) in [`template.toml`](template.toml).
