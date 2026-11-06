@@ -44,3 +44,11 @@ generic workspace template -- it is this specific project.
 works, what it needs to run, and what to adapt -- with the
 machine-readable half (recipe, requirements, and the environment it needs
 installed) in [`template.toml`](template.toml).
+
+## License
+
+The Disk Map app (`system/apps/disk_map/`) is licensed **GPL-2.0-only**: it bundles the GPL-2.0-only gp-treemap library
+and runs it in the same page. The text is `system/apps/disk_map/LICENSE`; `system/apps/disk_map/NOTICE.md` explains the
+scope. The rest of this repository keeps the terms it already carries: see
+[`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) and the `LICENSE` files beside individual parts (for example the
+shell app's).

@@ -28,10 +28,14 @@ from the original agent onto a clean default-workspace-template base):
 
 The snapshot includes these paths:
 
-- `system/apps/disk_map` -- the app. `scanner.py` walks the disk (real on-disk bytes, each hard-linked file counted once, symlinks never followed, never crossing into another mount, small folders and files pooled so every parent total still adds up) and saves a compact tree as `scan-<unix time>.json.gz`. `runner.py` is a Flask server that serves the page and its assets, the newest scan at `/api/scan` (and pretty-printed at `/api/scan/raw`), starts a new scan with `POST /api/rescan` in a separate process, and describes its own API at `/api/schema`. `assets/` holds the page script and styles and the bundled gp-treemap library (GPL-2.0, with its license text beside it). It is its own uv project (`pyproject.toml`, `uv.lock`) that takes the shared `app-schema` library from the workspace, has a test of its API document (`runner_test.py`) and the workspace's standard code-quality ratchets, and an `app.toml` that makes it appear as the "Disk Map" window.
+- `system/apps/disk_map` -- the app. `scanner.py` walks the disk (real on-disk bytes, each hard-linked file counted once, symlinks never followed, never crossing into another mount, small folders and files pooled so every parent total still adds up) and saves a compact tree as `scan-<unix time>.json.gz`. `runner.py` is a Flask server that serves the page and its assets, the newest scan at `/api/scan` (and pretty-printed at `/api/scan/raw`), starts a new scan with `POST /api/rescan` in a separate process, and describes its own API at `/api/schema`. `assets/` holds the page script and styles and the bundled gp-treemap library (unmodified gp-treemap 0.6.2, GPL-2.0-only; its license text sits beside it). It is its own uv project (`pyproject.toml`, `uv.lock`) that takes the shared `app-schema` library from the workspace, has a test of its API document (`runner_test.py`) and the workspace's standard code-quality ratchets, and an `app.toml` that makes it appear as the "Disk Map" window.
 - `system/supervisord.conf.d/disk-map.conf` -- the supervisord program that syncs the app's environment, registers its port with `forward_port.py` (`http://localhost:8194`, changeable with `DISK_MAP_PORT`), and runs it.
 
 Saved scans live under `data/.apps/disk-map/scans/` (or `DISK_MAP_DATA_DIR`). They are the raw records the page is drawn from, and they list the files of the machine they were taken on, which is why none ship with the template. With no scan saved, the page starts one on first load.
+
+**Licensing.** The Disk Map folder is licensed GPL-2.0-only (`system/apps/disk_map/LICENSE`, with the reasoning in
+`NOTICE.md`), because the page script runs in the same page as the bundled GPL-2.0-only gp-treemap library. The rest of
+this tree keeps the terms it already carries; `THIRD_PARTY_NOTICES.md` describes them and now lists gp-treemap.
 
 ## Recipe
 
@@ -59,7 +63,10 @@ theirs. Two kinds of entry, handled at different times:
   interactively with the user, after activation.
 
 
-No requirements -- runs as published, with no external permissions or secrets.
+- **Disk Map is GPL-2.0-only, the rest of the tree is not.** It bundles gp-treemap (GPL-2.0-only), so the whole
+  `system/apps/disk_map` folder carries that licence. Keep its `LICENSE` and `NOTICE.md` with it. If you publish a
+  workspace that contains Disk Map, that workspace ships GPL-2.0-only code: decide whether you want it there, and if
+  not, remove the app (its program entry is `system/supervisord.conf.d/disk-map.conf`).
 
 ## Environment
 

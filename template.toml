@@ -23,6 +23,7 @@ exclude = [
 ]
 modification_rules = [
     "change the app's default port to one that no stock workspace program uses",
+    "add the app's licence files (LICENSE, NOTICE.md), declare the licence in its pyproject, and list the bundled treemap library in the third-party notices file",
 ]
 
 # Everything an adopter must deal with before this is really theirs.
@@ -46,6 +47,10 @@ modification_rules = [
 #   Prose on both sides, so it is not cross-checked.
 #
 [requirements]
+
+[[requirements.adaptation]]
+summary = "Disk Map is licensed GPL-2.0-only because it bundles the GPL-2.0-only gp-treemap library; the rest of the tree keeps its own terms"
+resolution = "keep the app's LICENSE and NOTICE.md with it; if you publish a workspace that contains it, decide whether you want GPL-2.0-only code there, and if not remove the app and its program entry"
 
 # What the included code needs INSTALLED. apt takes bare names: versions
 # are a function of the apt snapshot timestamp, so replaying names at the

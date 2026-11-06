@@ -34,3 +34,17 @@ The app icons are not Lucide's: every one is drawn for this workspace to the
 rules in `docs/system/app-icons.md`, and the Classic Mac and Windows 2000 themes' pixel-art
 icons under `system/themes/<theme>/icons/` were drawn for the workspace, most with
 Retro Diffusion and the Routines icons by hand.
+
+## gp-treemap, and GrandPerspective through it
+
+The Disk Map app (`system/apps/disk_map/`) draws its treemap with gp-treemap 0.6.2, bundled unmodified as
+`system/apps/disk_map/src/disk_map/assets/gp-treemap.bundle.js`: byte for byte the `dist/gp-treemap.bundle.js` of the
+`@imbue-ai/gp-treemap` package on npm, whose source is <https://github.com/imbue-ai/gp-treemap>. gp-treemap is
+GPL-2.0-only; the package names Imbue as its author. It is derived from GrandPerspective 3.6.4 by Erwin Bonsma and
+contributors (also GPL-2.0), and its README asks that this attribution stay visible; the Disk Map page footer carries it.
+
+The licence text is `system/apps/disk_map/LICENSE`, the same file as
+`system/apps/disk_map/src/disk_map/assets/gp-treemap.LICENSE.txt`, copied byte for byte from the package's `LICENSE`.
+The page script runs in the same page as the library, so the whole Disk Map folder is distributed under GPL-2.0-only;
+`system/apps/disk_map/NOTICE.md` says what that covers. The rest of the tree is not affected: it keeps the terms
+described at the top of this file.

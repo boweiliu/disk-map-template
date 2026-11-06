@@ -3,6 +3,8 @@ name = "disk-map"
 version = "0.1.0"
 description = "Interactive treemap of where every gigabyte on the workspace disk goes, from a saved disk scan."
 readme = "README.md"
+license = "GPL-2.0-only"
+license-files = ["LICENSE"]
 requires-python = ">=3.12"
 dependencies = [
     "app-schema",

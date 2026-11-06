@@ -29,7 +29,8 @@ system/apps/disk_map/.venv/bin/disk-map
 workspace's standard code-quality ratchets, including the type check with `ty`. Run
 `uv run --project system/apps/disk_map pytest` from the workspace root.
 
-## Licenses
+## License
 
-`src/disk_map/assets/gp-treemap.bundle.js` is gp-treemap by Thad Hughes, GPL-2.0; the license text sits beside it
-(`gp-treemap.LICENSE.txt`). The rest of the app is separate code that loads it in the browser.
+GPL-2.0-only; the text is in `LICENSE` and the reasoning in `NOTICE.md`. The page draws its map with gp-treemap
+(`@imbue-ai/gp-treemap` 0.6.2, GPL-2.0-only, derived from GrandPerspective by Erwin Bonsma), bundled unmodified in
+`src/disk_map/assets/gp-treemap.bundle.js`, so the whole app is distributed under the same terms.
